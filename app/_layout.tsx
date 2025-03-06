@@ -1,11 +1,23 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Status } from './components/status';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Status } from './components';
 
 const Layout = () => {
+  const [showError, setShowError] = useState(false);
+
+  const toggle = () => {
+    setShowError((prev) => !prev); // Меняет состояние на противоположное
+  };
+
   return (
     <View style={ styles.container }>
       <Text>Hello, Expo!</Text>
+
+      <Alert showError={ showError } />
+
+      <TouchableOpacity onPress={ toggle }>
+        Click me
+      </TouchableOpacity>
 
       <Status status="Finished" />
     </View>

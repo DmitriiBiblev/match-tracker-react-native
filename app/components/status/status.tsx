@@ -23,7 +23,9 @@ export const Status: React.FC<Props> = ({ status }) => {
 
   return (
     <View style={ [styles.status, styles[currentStatus.color]] }>
-      <Text style={ styles.text }>{ currentStatus.name }</Text>
+      <Text style={ styles.text }>
+        { currentStatus.name }
+      </Text>
     </View>
   );
 };
