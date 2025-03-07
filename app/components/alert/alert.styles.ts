@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export const styles = (width: number) => StyleSheet.create({
   alert: {
+    width: width > 1250 ? 'auto' : '100%',
     backgroundColor: '#0F1318',
     paddingVertical: 14,
     paddingHorizontal: 24,

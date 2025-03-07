@@ -1,7 +1,7 @@
 import { TStatus } from '@/app/types';
 import { images } from '@/assets/images';
-import React, { useRef, useState } from 'react';
-import { Animated, Easing, Pressable, StyleProp, Text, View, ViewStyle } from 'react-native';
+import React, { useMemo, useRef, useState } from 'react';
+import { Animated, Easing, Pressable, StyleProp, Text, useWindowDimensions, View, ViewStyle } from 'react-native';
 import { styles } from './filter.styles';
 
 interface Props {
@@ -28,6 +28,8 @@ export const Filter: React.FC<Props> = ({ styles: container }) => {
   const translateY = useRef(new Animated.Value(-10)).current;
   const opacity = useRef(new Animated.Value(0)).current;
   const rotateX = useRef(new Animated.Value(0)).current;
+  const { width } = useWindowDimensions();
+  const s = useMemo(() => styles(width), [width]);
 
   const toggleDropdown = () => {
     setIsOpened(prev => !prev);
@@ -60,19 +62,19 @@ export const Filter: React.FC<Props> = ({ styles: container }) => {
   };
 
   return (
-    <View style={ [styles.filter, container] }>
+    <View style={ [s.filter, container] }>
       <Pressable
-        style={ [styles.select, isOpened && styles.selectPressed] }
+        style={ [s.select, isOpened && s.selectPressed] }
         onPress={ toggleDropdown }
       >
-        <Text style={ styles.value }>
+        <Text style={ s.value }>
           { options.find(({ value }) => value === selectedValue)?.text }
         </Text>
 
         <Animated.Image
           source={ images.arrow }
           style={ [
-            styles.arrow, {
+            s.arrow, {
               transform: [{
                 rotateX: rotateX.interpolate({
                   inputRange: [0, 180],
@@ -85,8 +87,9 @@ export const Filter: React.FC<Props> = ({ styles: container }) => {
       </Pressable>
 
       <Animated.View
-        style={ [styles.dropdown, {
+        style={ [s.dropdown, {
           opacity: opacity,
+          pointerEvents: isOpened ? 'auto' : 'none',
           transform: [{ translateY: translateY }],
         }] }
       >
@@ -96,11 +99,11 @@ export const Filter: React.FC<Props> = ({ styles: container }) => {
 
             return (
               <Pressable
-                style={ [styles.option, isSelected && styles.optionPressed] }
+                style={ [s.option, isSelected && s.optionPressed] }
                 key={ value }
                 onPress={ () => handleSelect(value) }
               >
-                <Text style={ [styles.optionText, isSelected && styles.optionTextPressed] }>
+                <Text style={ [s.optionText, isSelected && s.optionTextPressed] }>
                   { text }
                 </Text>
               </Pressable>

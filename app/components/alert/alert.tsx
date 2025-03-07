@@ -1,6 +1,6 @@
 import { images } from '@/assets/images';
-import React from 'react';
-import { Image, Text, View } from 'react-native';
+import React, { useMemo } from 'react';
+import { Image, Text, useWindowDimensions, View } from 'react-native';
 import { styles } from './alert.styles';
 
 interface Props {
@@ -10,11 +10,14 @@ interface Props {
 export const Alert: React.FC<Props> = ({ showError }) => {
   if (!showError) return null;
 
-  return (
-    <View style={ styles.alert }>
-      <Image style={ styles.icon } source={ images.alertTriangle } />
+  const { width } = useWindowDimensions();
+  const s = useMemo(() => styles(width), [width]);
 
-      <Text style={ styles.text }>
+  return (
+    <View style={ s.alert }>
+      <Image style={ s.icon } source={ images.alertTriangle } />
+
+      <Text style={ s.text }>
         Ошибка: не удалось загрузить информацию
       </Text>
     </View>

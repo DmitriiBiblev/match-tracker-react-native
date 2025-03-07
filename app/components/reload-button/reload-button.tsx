@@ -1,6 +1,6 @@
 import { images } from '@/assets/images';
-import React from 'react';
-import { Image, Pressable, Text } from 'react-native';
+import React, { useMemo } from 'react';
+import { Image, Pressable, Text, useWindowDimensions } from 'react-native';
 import { styles } from './reload-button.styles';
 
 interface Props {
@@ -8,23 +8,28 @@ interface Props {
   onPress: () => void;
 }
 
-export const ReloadButton: React.FC<Props> = ({ isLoading, onPress }) => (
-  <Pressable
-    style={ ({ pressed }) => [
-      styles.btn,
-      pressed && styles.pressed,
-      isLoading && styles.disabled
-    ] }
-    onPress={ onPress }
-    disabled={ isLoading }
-  >
-    <Text style={ [
-      styles.text,
-      isLoading && styles.disabledText
-    ] }>
-      Обновить
-    </Text>
+export const ReloadButton: React.FC<Props> = ({ isLoading, onPress }) => {
+  const { width } = useWindowDimensions();
+  const s = useMemo(() => styles(width), [width]);
 
-    <Image source={ images.refresh } style={ styles.icon } />
-  </Pressable>
-);
+  return (
+    <Pressable
+      style={ ({ pressed }) => [
+        s.btn,
+        pressed && s.pressed,
+        isLoading && s.disabled
+      ] }
+      onPress={ onPress }
+      disabled={ isLoading }
+    >
+      <Text style={ [
+        s.text,
+        isLoading && s.disabledText
+      ] }>
+        Обновить
+      </Text>
+
+      <Image source={ images.refresh } style={ s.icon } />
+    </Pressable>
+  );
+};

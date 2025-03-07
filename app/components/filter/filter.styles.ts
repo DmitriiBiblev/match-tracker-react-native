@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export const styles = (width: number) => StyleSheet.create({
   filter: {
-    minWidth: 170,
+    minWidth: width > 1250 ? 170 : '100%',
     zIndex: 10,
   },
 

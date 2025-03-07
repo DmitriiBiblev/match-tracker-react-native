@@ -1,31 +1,33 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export const styles = (width: number) => StyleSheet.create({
   scroll: {
     backgroundColor: '#06080C',
-    padding: 42,
+    paddingVertical: width > 600 ? 42 : 32,
+    paddingHorizontal: width > 600 ? 42 : 16,
   },
 
   container: {
     flexDirection: 'column',
-    gap: 20,
+    gap: width > 1250 ? 20 : 32,
   },
 
   header: {
-    flexDirection: 'row',
+    flexDirection: width > 1250 ? 'row' : 'column',
     alignItems: 'center',
-    gap: 12,
+    gap: width > 1250 ? 12 : 10,
     zIndex: 10
   },
 
   logo: {
-    width: 257,
-    height: 32,
+    width: width > 600 ? 257 : 225,
+    height: width > 600 ? 32 : 28,
+    marginBottom: width > 1250 ? 0 : 4,
     resizeMode: 'contain',
   },
 
   filter: {
-    marginLeft: 12,
+    marginLeft: width > 1250 ? 12 : 0,
     marginRight: 'auto',
   },
 

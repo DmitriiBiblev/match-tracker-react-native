@@ -1,13 +1,15 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export const styles = (width: number) => StyleSheet.create({
   btn: {
+    width: width > 1250 ? 'auto' : '100%',
     backgroundColor: '#EB0237',
     paddingVertical: 15,
     paddingHorizontal: 40,
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     gap: 10,
   },
 
