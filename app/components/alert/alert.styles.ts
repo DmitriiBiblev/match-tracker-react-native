@@ -1,13 +1,14 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-   alert: {
+  alert: {
     backgroundColor: '#0F1318',
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 10,
   },
 
   icon: {
@@ -20,6 +21,5 @@ export const styles = StyleSheet.create({
     lineHeight: 22,
     fontWeight: 500,
     color: 'white',
-    marginLeft: 10,
   },
 });

@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 10,
   },
 
   text: {
@@ -24,7 +25,6 @@ export const styles = StyleSheet.create({
   icon: {
     width: 20,
     height: 20,
-    marginLeft: 10,
   },
 
   pressed: {
