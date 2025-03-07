@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 24,
     borderRadius: 4,
     flexDirection: 'row',
+    alignItems: 'center',
     gap: 8
   },
 
@@ -32,4 +33,10 @@ export const styles = StyleSheet.create({
     fontWeight: 500,
     color: '#FAFAFA66',
   },
+
+  divider: {
+    width: 1,
+    height: 16,
+    backgroundColor: '#141A21',
+  }
 });

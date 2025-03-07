@@ -1,7 +1,6 @@
-import { MatchInfo } from '@/app/components/match-info';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Alert, Player, ReloadButton, Status, Team } from './components';
+import { ScrollView, StyleSheet, Text } from 'react-native';
+import { Alert, Match, MatchInfo, Player, ReloadButton, Status, Team } from './components';
 
 const Layout = () => {
   const [showError, setShowError] = useState(false);
@@ -11,7 +10,9 @@ const Layout = () => {
   };
 
   return (
-    <View style={ styles.container }>
+    <ScrollView style={ styles.container }>
+      <Match />
+
       <Team name="Team 1" />
 
       <Team name="Team 1" isReversed={ true } />
@@ -27,7 +28,7 @@ const Layout = () => {
       <ReloadButton isLoading={ true } onPress={ toggle } />
 
       <Status status="Finished" />
-    </View>
+    </ScrollView>
   );
 };
 
@@ -35,8 +36,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#06080C',
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingHorizontal: 20,
   },
 });

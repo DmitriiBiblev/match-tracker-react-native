@@ -22,16 +22,20 @@ const params: Param[] = [
 export const MatchInfo: React.FC<Props> = (props: Props) => (
   <View style={ styles.info }>
     {
-      params.map(({ value, text }) => (
-        <View style={ styles.wrapper } key={ value }>
-          <Text style={ styles.label }>
-            { text }
-          </Text>
+      params.map(({ value, text }, index) => (
+        <>
+          { index > 0 && <View style={ styles.divider }></View> }
 
-          <Text style={ styles.value }>
-            { props[value] }
-          </Text>
-        </View>
+          <View style={ styles.wrapper } key={ value }>
+            <Text style={ styles.label }>
+              { text }
+            </Text>
+
+            <Text style={ styles.value }>
+              { props[value] }
+            </Text>
+          </View>
+        </>
       ))
     }
   </View>

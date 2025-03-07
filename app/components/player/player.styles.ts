@@ -9,11 +9,11 @@ const wrapper: ViewStyle = {
 export const styles = StyleSheet.create({
   player: {
     ...wrapper,
-    width: '100%',
     backgroundColor: '#101318',
     paddingVertical: 8,
     paddingHorizontal: 24,
     borderRadius: 4,
+    flexGrow: 1,
     justifyContent: 'space-between',
   },
 
