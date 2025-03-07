@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
-import { Alert, Match, MatchInfo, Player, ReloadButton, Status, Team } from './components';
+import { Alert, Filter, Match, MatchInfo, Player, ReloadButton, Status, Team } from './components';
 
 const Layout = () => {
   const [showError, setShowError] = useState(false);
@@ -14,6 +14,8 @@ const Layout = () => {
       <Match />
 
       <Team name="Team 1" />
+
+      <Filter />
 
       <Team name="Team 1" isReversed={ true } />
 

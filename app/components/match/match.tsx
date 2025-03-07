@@ -13,7 +13,6 @@ interface Props {
 
 export const Match: React.FC<Props> = ({ match }) => {
   const [isOpened, setIsOpened] = useState(false);
-
   const animation = useRef(new Animated.Value(0)).current;
   const contentHeight = useRef(0);
 
