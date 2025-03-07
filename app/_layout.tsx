@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Alert, ReloadButton, Status, Team } from './components';
+import { Alert, Player, ReloadButton, Status, Team } from './components';
 
 const Layout = () => {
   const [showError, setShowError] = useState(false);
@@ -17,6 +17,8 @@ const Layout = () => {
 
       <Text>Hello, Expo!</Text>
 
+      <Player name="User 1" totalKills={ 4 } />
+
       <Alert showError={ showError } />
 
       <ReloadButton isLoading={ true } onPress={ toggle } />
@@ -32,6 +34,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 20,
   },
 });
 
