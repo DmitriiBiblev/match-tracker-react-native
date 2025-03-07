@@ -1,7 +1,16 @@
 import { IMatch } from '@/app/interfaces';
 import { images } from '@/assets/images';
-import React, { useRef, useState } from 'react';
-import { Animated, Image, LayoutChangeEvent, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useMemo, useRef, useState } from 'react';
+import {
+  Animated,
+  Image,
+  LayoutChangeEvent,
+  Pressable,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View
+} from 'react-native';
 import { Status } from '../status';
 import { Team } from '../team';
 import { TeamInfo } from '../team-info';
@@ -15,6 +24,8 @@ export const Match: React.FC<Props> = ({ match }) => {
   const [isOpened, setIsOpened] = useState(false);
   const animation = useRef(new Animated.Value(0)).current;
   const contentHeight = useRef(0);
+  const { width } = useWindowDimensions();
+  const s = useMemo(() => styles(width), [width]);
 
   const toggleAccordion = () => {
     Animated.timing(animation, {
@@ -35,18 +46,18 @@ export const Match: React.FC<Props> = ({ match }) => {
 
   const changeContentHeight = (event: LayoutChangeEvent) => {
     const { height } = event.nativeEvent.layout;
-    const { padding, marginTop } = StyleSheet.flatten(styles.content);
+    const { padding, marginTop } = StyleSheet.flatten(s.content);
 
     contentHeight.current = height + padding * 2 + marginTop;
   };
 
   return (
-    <View style={ styles.match }>
-      <Pressable style={ styles.header } onPress={ toggleAccordion }>
+    <View style={ s.match }>
+      <Pressable style={ s.header } onPress={ toggleAccordion }>
         <Team name="Team 1" />
 
-        <View style={ styles.info }>
-          <Text style={ styles.score }>
+        <View style={ s.info }>
+          <Text style={ s.score }>
             { 1 } : { 3 }
           </Text>
 
@@ -55,16 +66,39 @@ export const Match: React.FC<Props> = ({ match }) => {
 
         <Team name="Team 2" isReversed={ true } />
 
-        <Image source={ isOpened ? images.chevronUp : images.chevronDown } />
+        { width > 1250 && <Image source={ isOpened ? images.chevronUp : images.chevronDown } /> }
       </Pressable>
 
-      <Animated.View style={ [styles.dropdown, animatedStyles] }>
-        <View style={ styles.content } onLayout={ changeContentHeight }>
+      <Animated.View style={ [s.dropdown, animatedStyles] }>
+        <View style={ s.content } onLayout={ changeContentHeight }>
           <TeamInfo />
+
+          {
+            width <= 1250 && (
+              <View style={ s.vs }>
+                <View style={ s.divider } />
+
+                <Text style={ s.vsText }>VS</Text>
+
+                <View style={ s.divider } />
+              </View>
+            )
+          }
 
           <TeamInfo />
         </View>
       </Animated.View>
+
+      {
+        width <= 1250 && (
+          <Pressable
+            style={ s.arrow }
+            onPress={ toggleAccordion }
+          >
+            <Image source={ isOpened ? images.chevronUp : images.chevronDown } />
+          </Pressable>
+        )
+      }
     </View>
   );
 };

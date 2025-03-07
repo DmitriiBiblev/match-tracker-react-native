@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export const styles = (width: number) => StyleSheet.create({
   team: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 14,
+    gap: width > 600 ? 14 : 6,
   },
 
   reversed: {
@@ -12,13 +12,13 @@ export const styles = StyleSheet.create({
   },
 
   preview: {
-    width: 48,
-    height: 48,
+    width: width > 600 ? 48 : 28,
+    height: width > 600 ? 48 : 28,
   },
 
   text: {
-    fontSize: 16,
-    lineHeight: 19,
+    fontSize: width > 600 ? 16 : 14,
+    lineHeight: width > 600 ? 19 : 17,
     fontWeight: 600,
     color: '#fff',
   },

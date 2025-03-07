@@ -1,6 +1,6 @@
 import { images } from '@/assets/images';
-import React from 'react';
-import { Image, Text, View } from 'react-native';
+import React, { useMemo } from 'react';
+import { Image, Text, useWindowDimensions, View } from 'react-native';
 import { styles } from './team.styles';
 
 interface Props {
@@ -8,15 +8,17 @@ interface Props {
   isReversed?: boolean;
 }
 
-export const Team: React.FC<Props> = ({ name, isReversed }) => (
-  <View style={ [
-    styles.team,
-    isReversed && styles.reversed
-  ] }>
-    <Image style={ styles.preview } source={ images.illustrationRole } />
+export const Team: React.FC<Props> = ({ name, isReversed }) => {
+  const { width } = useWindowDimensions();
+  const s = useMemo(() => styles(width), [width]);
 
-    <Text style={ styles.text }>
-      { name }
-    </Text>
-  </View>
-);
+  return (
+    <View style={ [s.team, isReversed && s.reversed] }>
+      <Image style={ s.preview } source={ images.illustrationRole } />
+
+      <Text style={ s.text }>
+        { name }
+      </Text>
+    </View>
+  );
+};

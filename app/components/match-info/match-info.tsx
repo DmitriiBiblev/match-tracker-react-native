@@ -1,6 +1,6 @@
+import React, { Fragment, useMemo } from 'react';
+import { Text, useWindowDimensions, View } from 'react-native';
 import { styles } from './match-info.styles';
-import React, { Fragment } from 'react';
-import { Text, View } from 'react-native';
 
 interface Props {
   points: number;
@@ -19,24 +19,29 @@ const params: Param[] = [
   { value: 'totalKills', text: 'Всего убийств:' },
 ];
 
-export const MatchInfo: React.FC<Props> = (props: Props) => (
-  <View style={ styles.info }>
-    {
-      params.map(({ value, text }, index) => (
-        <Fragment key={ value }>
-          { index > 0 && <View style={ styles.divider }></View> }
+export const MatchInfo: React.FC<Props> = (props: Props) => {
+  const { width } = useWindowDimensions();
+  const s = useMemo(() => styles(width), [width]);
 
-          <View style={ styles.wrapper }>
-            <Text style={ styles.label }>
-              { text }
-            </Text>
+  return (
+    <View style={ s.info }>
+      {
+        params.map(({ value, text }, index) => (
+          <Fragment key={ value }>
+            { index > 0 && <View style={ s.divider }></View> }
 
-            <Text style={ styles.value }>
-              { props[value] }
-            </Text>
-          </View>
-        </Fragment>
-      ))
-    }
-  </View>
-);
+            <View style={ s.wrapper }>
+              <Text style={ s.label }>
+                { text }
+              </Text>
+
+              <Text style={ s.value }>
+                { props[value] }
+              </Text>
+            </View>
+          </Fragment>
+        ))
+      }
+    </View>
+  );
+};

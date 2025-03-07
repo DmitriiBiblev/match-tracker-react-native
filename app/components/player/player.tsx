@@ -1,6 +1,6 @@
 import { images } from '@/assets/images';
-import React from 'react';
-import { Image, Text, View } from 'react-native';
+import React, { useMemo } from 'react';
+import { Image, Text, useWindowDimensions, View } from 'react-native';
 import { styles } from './player.styles';
 
 interface Props {
@@ -8,24 +8,29 @@ interface Props {
   totalKills: number;
 }
 
-export const Player: React.FC<Props> = ({ name, totalKills }) => (
-  <View style={ styles.player }>
-    <View style={ styles.wrapper }>
-      <Image source={ images.avatar } style={ styles.avatar } />
+export const Player: React.FC<Props> = ({ name, totalKills }) => {
+  const { width } = useWindowDimensions();
+  const s = useMemo(() => styles(width), [width]);
 
-      <Text style={ styles.value }>
-        { name }
-      </Text>
+  return (
+    <View style={ s.player }>
+      <View style={ s.wrapper }>
+        <Image source={ images.avatar } style={ s.avatar } />
+
+        <Text style={ s.value }>
+          { name }
+        </Text>
+      </View>
+
+      <View style={ s.wrapper }>
+        <Text style={ s.label }>
+          Убийств:
+        </Text>
+
+        <Text style={ s.value }>
+          { totalKills }
+        </Text>
+      </View>
     </View>
-
-    <View style={ styles.wrapper }>
-      <Text style={ styles.label }>
-        Убийств:
-      </Text>
-
-      <Text style={ styles.value }>
-        { totalKills }
-      </Text>
-    </View>
-  </View>
-);
+  );
+};

@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export const styles = (width: number) => StyleSheet.create({
   info: {
     width: '100%',
     backgroundColor: '#101318',
     paddingVertical: 14,
-    paddingHorizontal: 24,
+    paddingHorizontal: width > 600 ? 24 : 12,
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
   },
 
   wrapper: {
-    flexGrow: 1,
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -21,22 +21,22 @@ export const styles = StyleSheet.create({
   },
 
   value: {
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: width > 600 ? 16 : 14,
+    lineHeight: width > 600 ? 24 : 21,
     fontWeight: 600,
     color: '#fff',
   },
 
   label: {
-    fontSize: 14,
-    lineHeight: 21,
+    fontSize: width > 600 ? 14 : 12,
+    lineHeight: width > 600 ? 21 : 18,
     fontWeight: 500,
     color: '#FAFAFA66',
   },
 
   divider: {
     width: 1,
-    height: 16,
+    height: width > 600 ? 16 : 13,
     backgroundColor: '#141A21',
   }
 });

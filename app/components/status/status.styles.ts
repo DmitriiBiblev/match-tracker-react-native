@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export const styles = (width: number) => StyleSheet.create({
   status: {
-    minWidth: 92,
-    paddingVertical: 6,
+    minWidth: width > 600 ? 92 : 70,
+    paddingVertical: width > 600 ? 6 : 4,
     paddingHorizontal: 8,
     borderRadius: 4,
   },

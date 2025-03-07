@@ -6,12 +6,13 @@ const wrapper: ViewStyle = {
   gap: 8,
 };
 
-export const styles = StyleSheet.create({
+export const styles = (width: number) => StyleSheet.create({
   player: {
     ...wrapper,
     backgroundColor: '#101318',
-    paddingVertical: 8,
-    paddingHorizontal: 24,
+    paddingVertical: width > 1700 ? 8 : 7,
+    paddingHorizontal: width > 1700 ? 24 : 12,
+    flexDirection: width > 1700 || width <= 1250 && width > 900 ? 'row' : 'column',
     borderRadius: 4,
     flexGrow: 1,
     justifyContent: 'space-between',
@@ -20,20 +21,20 @@ export const styles = StyleSheet.create({
   wrapper,
 
   avatar: {
-    width: 36,
-    height: 36,
+    width: width > 600 ? 36 : 32,
+    height: width > 600 ? 36 : 32,
   },
 
   value: {
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: width > 600 ? 16 : 14,
+    lineHeight: width > 600 ? 24 : 21,
     fontWeight: 600,
     color: '#fff',
   },
 
   label: {
-    fontSize: 14,
-    lineHeight: 21,
+    fontSize: width > 600 ? 14 : 12,
+    lineHeight: width > 600 ? 21 : 18,
     fontWeight: 500,
     color: '#FAFAFA66',
   },

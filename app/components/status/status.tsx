@@ -1,6 +1,6 @@
 import { TStatus } from '@/app/types';
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useMemo } from 'react';
+import { Text, useWindowDimensions, View } from 'react-native';
 import { styles } from './status.styles';
 
 interface Status {
@@ -20,10 +20,12 @@ interface Props {
 
 export const Status: React.FC<Props> = ({ status }) => {
   const currentStatus: Status = statuses[status];
+  const { width } = useWindowDimensions();
+  const s = useMemo(() => styles(width), [width]);
 
   return (
-    <View style={ [styles.status, styles[currentStatus.color]] }>
-      <Text style={ styles.text }>
+    <View style={ [s.status, s[currentStatus.color]] }>
+      <Text style={ s.text }>
         { currentStatus.name }
       </Text>
     </View>
