@@ -12,7 +12,7 @@ export const Alert: React.FC<Props> = ({ showError }) => {
 
   return (
     <View style={ styles.alert }>
-      <Image source={ images.alertTriangle } style={ styles.icon } />
+      <Image style={ styles.icon } source={ images.alertTriangle } />
 
       <Text style={ styles.text }>
         Ошибка: не удалось загрузить информацию
