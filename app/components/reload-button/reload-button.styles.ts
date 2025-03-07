@@ -1,0 +1,37 @@
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+  btn: {
+    backgroundColor: '#EB0237',
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  text: {
+    fontSize: 18,
+    lineHeight: 22,
+    fontWeight: 600,
+    color: '#fff',
+  },
+
+  disabledText: {
+    color: '#787878',
+  },
+
+  icon: {
+    width: 20,
+    height: 20,
+    marginLeft: 10,
+  },
+
+  pressed: {
+    backgroundColor: '#A01131',
+  },
+
+  disabled: {
+    backgroundColor: '#701328',
+  }
+});

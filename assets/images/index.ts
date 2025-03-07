@@ -1,3 +1,4 @@
 export const images = {
-  alertTriangle: require('./alert-triangle/alert-triangle.png')
+  alertTriangle: require('./alert-triangle/alert-triangle.png'),
+  refresh: require('./refresh/refresh.png')
 };

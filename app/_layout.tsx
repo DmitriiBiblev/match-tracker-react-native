@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Alert, Status } from './components';
+import { StyleSheet, Text, View } from 'react-native';
+import { Alert, ReloadButton, Status } from './components';
 
 const Layout = () => {
   const [showError, setShowError] = useState(false);
@@ -15,9 +15,7 @@ const Layout = () => {
 
       <Alert showError={ showError } />
 
-      <TouchableOpacity onPress={ toggle }>
-        Click me
-      </TouchableOpacity>
+      <ReloadButton isLoading={ true } onPress={ toggle } />
 
       <Status status="Finished" />
     </View>
