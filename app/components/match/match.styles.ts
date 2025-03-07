@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 4,
     flexDirection: 'column',
+    zIndex: -1
   },
 
   header: {

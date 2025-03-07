@@ -1,10 +1,11 @@
 import { TStatus } from '@/app/types';
 import { images } from '@/assets/images';
 import React, { useRef, useState } from 'react';
-import { Animated, Easing, Pressable, Text, View } from 'react-native';
+import { Animated, Easing, Pressable, StyleProp, Text, View, ViewStyle } from 'react-native';
 import { styles } from './filter.styles';
 
 interface Props {
+  styles: StyleProp<ViewStyle>;
 }
 
 type Value = TStatus | null;
@@ -21,7 +22,7 @@ const options: Option[] = [
   { value: 'Scheduled', text: 'Match preparing' },
 ];
 
-export const Filter: React.FC<Props> = (props: Props) => {
+export const Filter: React.FC<Props> = ({ styles: container }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [selectedValue, setSelectedValue] = useState<Value>(null);
   const translateY = useRef(new Animated.Value(-10)).current;
@@ -59,7 +60,7 @@ export const Filter: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <View style={ styles.filter }>
+    <View style={ [styles.filter, container] }>
       <Pressable
         style={ [styles.select, isOpened && styles.selectPressed] }
         onPress={ toggleDropdown }
@@ -96,6 +97,7 @@ export const Filter: React.FC<Props> = (props: Props) => {
             return (
               <Pressable
                 style={ [styles.option, isSelected && styles.optionPressed] }
+                key={ value }
                 onPress={ () => handleSelect(value) }
               >
                 <Text style={ [styles.optionText, isSelected && styles.optionTextPressed] }>

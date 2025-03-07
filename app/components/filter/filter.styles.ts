@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   filter: {
-    width: '100%',
+    minWidth: 170,
     zIndex: 10,
   },
 

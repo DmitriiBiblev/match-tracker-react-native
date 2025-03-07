@@ -1,5 +1,5 @@
 import { styles } from './match-info.styles';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Text, View } from 'react-native';
 
 interface Props {
@@ -23,10 +23,10 @@ export const MatchInfo: React.FC<Props> = (props: Props) => (
   <View style={ styles.info }>
     {
       params.map(({ value, text }, index) => (
-        <>
+        <Fragment key={ value }>
           { index > 0 && <View style={ styles.divider }></View> }
 
-          <View style={ styles.wrapper } key={ value }>
+          <View style={ styles.wrapper }>
             <Text style={ styles.label }>
               { text }
             </Text>
@@ -35,7 +35,7 @@ export const MatchInfo: React.FC<Props> = (props: Props) => (
               { props[value] }
             </Text>
           </View>
-        </>
+        </Fragment>
       ))
     }
   </View>

@@ -1,6 +1,8 @@
+import { images } from '@/assets/images';
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
-import { Alert, Filter, Match, MatchInfo, Player, ReloadButton, Status, Team } from './components';
+import { FlatList, Image, ScrollView, View } from 'react-native';
+import { Alert, Filter, Match, ReloadButton } from './components';
+import { styles } from './layout.styles';
 
 const Layout = () => {
   const [showError, setShowError] = useState(false);
@@ -10,36 +12,25 @@ const Layout = () => {
   };
 
   return (
-    <ScrollView style={ styles.container }>
-      <Match />
+    <ScrollView style={ styles.scroll } contentContainerStyle={ styles.container }>
+      <View style={ styles.header }>
+        <Image source={ images.logo } style={ styles.logo } />
 
-      <Team name="Team 1" />
+        <Filter styles={ styles.filter } />
 
-      <Filter />
+        <Alert showError={ showError } />
 
-      <Team name="Team 1" isReversed={ true } />
+        <ReloadButton isLoading={ false } onPress={ toggle } />
+      </View>
 
-      <MatchInfo points={ 1 } place={ 2 } totalKills={ 3 } />
-
-      <Text>Hello, Expo!</Text>
-
-      <Player name="User 1" totalKills={ 4 } />
-
-      <Alert showError={ showError } />
-
-      <ReloadButton isLoading={ true } onPress={ toggle } />
-
-      <Status status="Finished" />
+      <FlatList
+        contentContainerStyle={ styles.list }
+        data={ [1, 2, 3, 4, 5, 6, 7, 8, 9] }
+        keyExtractor={ index => index.toString() }
+        renderItem={ ({ item }) => <Match /> }
+      />
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#06080C',
-    flex: 1,
-    paddingHorizontal: 20,
-  },
-});
 
 export default Layout;

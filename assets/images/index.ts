@@ -5,5 +5,6 @@ export const images = {
   chevronDown: require('./chevron-down/chevron-down.png'),
   chevronUp: require('./chevron-up/chevron-up.png'),
   illustrationRole: require('./illustrations-role/illustrations-role.png'),
+  logo: require('./logo/logo.png'),
   refresh: require('./refresh/refresh.png')
 };

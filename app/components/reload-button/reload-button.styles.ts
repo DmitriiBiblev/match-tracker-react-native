@@ -23,8 +23,8 @@ export const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 20,
-    height: 20,
+    width: 26,
+    height: 26,
   },
 
   pressed: {
