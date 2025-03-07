@@ -1,3 +1,4 @@
+import { MatchInfo } from '@/app/components/match-info';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Alert, Player, ReloadButton, Status, Team } from './components';
@@ -14,6 +15,8 @@ const Layout = () => {
       <Team name="Team 1" />
 
       <Team name="Team 1" isReversed={ true } />
+
+      <MatchInfo points={ 1 } place={ 2 } totalKills={ 3 } />
 
       <Text>Hello, Expo!</Text>
 
