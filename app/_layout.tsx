@@ -25,7 +25,7 @@ const Layout = () => {
       <FlatList
         contentContainerStyle={ s.list }
         data={ matches }
-        keyExtractor={ index => index.toString() }
+        keyExtractor={ (item) => item.title }
         renderItem={ ({ item }) => <Match match={ item } /> }
       />
     </ScrollView>

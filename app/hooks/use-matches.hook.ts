@@ -10,21 +10,16 @@ export const useMatches = () => {
     isError: false
   });
 
-  const loadMatches = async () => {
+  const loadMatches = () => {
     dispatch({ type: MatchesActionType.GET_MATCHES });
 
-    try {
-      const matches: IMatch[] = await getMatches();
-
-      dispatch({ type: MatchesActionType.GET_MATCHES_SUCCESS, payload: matches });
-    } catch {
-      dispatch({ type: MatchesActionType.GET_MATCHES_FAILURE });
-    }
+    getMatches(
+      (matches: IMatch[]) => dispatch({ type: MatchesActionType.GET_MATCHES_SUCCESS, payload: matches }),
+      () => dispatch({ type: MatchesActionType.GET_MATCHES_FAILURE })
+    );
   };
 
-  useEffect(() => {
-    loadMatches();
-  }, []);
+  useEffect(loadMatches, []);
 
   return { ...state, loadMatches };
 };

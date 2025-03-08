@@ -1,16 +1,24 @@
-import { axiosInstance } from '../api';
 import { IMatch } from '../interfaces';
-import AxiosXHR = Axios.AxiosXHR;
 
 interface Response {
-  data: {
-    matches: IMatch[]
-  };
-  ok: string;
+  type: string;
+  data: IMatch[];
 }
 
-export const getMatches = async (): Promise<IMatch[]> => {
-  const response: AxiosXHR<Response> = await axiosInstance.get<Response>('/fronttemp');
+const socketUrl = 'wss://app.ftoyd.com/fronttemp-service/ws';
 
-  return response.data.data.matches;
+let socket: WebSocket | null = null;
+
+export const getMatches = (onMatches: (matches: IMatch[]) => void, onError: () => void): void => {
+  if (socket) socket.close();
+
+  socket = new WebSocket(socketUrl);
+
+  socket.onmessage = (event: MessageEvent) => {
+    const { data }: Response = JSON.parse(event.data);
+
+    onMatches(data);
+  };
+
+  socket.onerror = onError;
 };
