@@ -1,17 +1,14 @@
 import { images } from '@/assets/images';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { FlatList, Image, ScrollView, useWindowDimensions, View } from 'react-native';
 import { Alert, Filter, Match, ReloadButton } from './components';
+import { useMatches } from './hooks';
 import { styles } from './layout.styles';
 
 const Layout = () => {
-  const [showError, setShowError] = useState(false);
+  const { matches, isLoading, isError, loadMatches } = useMatches();
   const { width } = useWindowDimensions();
   const s = useMemo(() => styles(width), [width]);
-
-  const toggle = () => {
-    setShowError((prev) => !prev); // Меняет состояние на противоположное
-  };
 
   return (
     <ScrollView style={ s.scroll } contentContainerStyle={ s.container }>
@@ -20,16 +17,16 @@ const Layout = () => {
 
         <Filter styles={ s.filter } />
 
-        { showError && <Alert /> }
+        { isError && <Alert /> }
 
-        <ReloadButton isLoading={ false } onPress={ toggle } />
+        <ReloadButton isLoading={ isLoading } onPress={ loadMatches } />
       </View>
 
       <FlatList
         contentContainerStyle={ s.list }
-        data={ [1, 2, 3, 4, 5, 6, 7, 8, 9] }
+        data={ matches }
         keyExtractor={ index => index.toString() }
-        renderItem={ ({ item }) => <Match /> }
+        renderItem={ ({ item }) => <Match match={ item } /> }
       />
     </ScrollView>
   );

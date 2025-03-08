@@ -17,7 +17,7 @@ import { TeamInfo } from '../team-info';
 import { styles } from './match.styles';
 
 interface Props {
-  match?: IMatch;
+  match: IMatch;
 }
 
 export const Match: React.FC<Props> = ({ match }) => {
@@ -54,24 +54,24 @@ export const Match: React.FC<Props> = ({ match }) => {
   return (
     <View style={ s.match }>
       <Pressable style={ s.header } onPress={ toggleAccordion }>
-        <Team name="Team 1" />
+        <Team name={ match.awayTeam.name } />
 
         <View style={ s.info }>
           <Text style={ s.score }>
-            { 1 } : { 3 }
+            { match.awayScore } : { match.homeScore }
           </Text>
 
-          <Status status="Scheduled" />
+          <Status status={ match.status } />
         </View>
 
-        <Team name="Team 2" isReversed={ true } />
+        <Team name={ match.homeTeam.name } isReversed={ true } />
 
         { width > 1250 && <Image source={ isOpened ? images.chevronUp : images.chevronDown } /> }
       </Pressable>
 
       <Animated.View style={ [s.dropdown, animatedStyles] }>
         <View style={ s.content } onLayout={ changeContentHeight }>
-          <TeamInfo />
+          <TeamInfo info={ match.awayTeam } />
 
           {
             width <= 1250 && (
@@ -85,7 +85,7 @@ export const Match: React.FC<Props> = ({ match }) => {
             )
           }
 
-          <TeamInfo />
+          <TeamInfo info={ match.homeTeam } />
         </View>
       </Animated.View>
 
