@@ -3,13 +3,7 @@ import React, { useMemo } from 'react';
 import { Image, Text, useWindowDimensions, View } from 'react-native';
 import { styles } from './alert.styles';
 
-interface Props {
-  showError: boolean;
-}
-
-export const Alert: React.FC<Props> = ({ showError }) => {
-  if (!showError) return null;
-
+export const Alert: React.FC = () => {
   const { width } = useWindowDimensions();
   const s = useMemo(() => styles(width), [width]);
 

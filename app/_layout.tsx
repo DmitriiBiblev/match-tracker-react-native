@@ -20,7 +20,7 @@ const Layout = () => {
 
         <Filter styles={ s.filter } />
 
-        <Alert showError={ showError } />
+        { showError && <Alert /> }
 
         <ReloadButton isLoading={ false } onPress={ toggle } />
       </View>
