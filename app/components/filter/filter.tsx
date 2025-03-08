@@ -1,17 +1,17 @@
-import { TStatus } from '@/app/types';
+import { TFilters } from '@/app/types';
 import { images } from '@/assets/images';
 import React, { useMemo, useRef, useState } from 'react';
 import { Animated, Easing, Pressable, StyleProp, Text, useWindowDimensions, View, ViewStyle } from 'react-native';
 import { styles } from './filter.styles';
 
 interface Props {
+  value: TFilters;
   styles: StyleProp<ViewStyle>;
+  onSelected: (value: TFilters) => void;
 }
 
-type Value = TStatus | null;
-
 interface Option {
-  value: Value;
+  value: TFilters;
   text: string;
 }
 
@@ -22,9 +22,8 @@ const options: Option[] = [
   { value: 'Scheduled', text: 'Match preparing' },
 ];
 
-export const Filter: React.FC<Props> = ({ styles: container }) => {
+export const Filter: React.FC<Props> = ({ value, styles: container, onSelected }) => {
   const [isOpened, setIsOpened] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<Value>(null);
   const translateY = useRef(new Animated.Value(-10)).current;
   const opacity = useRef(new Animated.Value(0)).current;
   const rotateX = useRef(new Animated.Value(0)).current;
@@ -56,8 +55,8 @@ export const Filter: React.FC<Props> = ({ styles: container }) => {
     }).start();
   };
 
-  const handleSelect = (value: TStatus | null) => {
-    setSelectedValue(value);
+  const handleSelect = (value: TFilters) => {
+    onSelected(value);
     toggleDropdown();
   };
 
@@ -68,7 +67,7 @@ export const Filter: React.FC<Props> = ({ styles: container }) => {
         onPress={ toggleDropdown }
       >
         <Text style={ s.value }>
-          { options.find(({ value }) => value === selectedValue)?.text }
+          { options.find((option) => option.value === value)?.text }
         </Text>
 
         <Animated.Image
@@ -94,17 +93,17 @@ export const Filter: React.FC<Props> = ({ styles: container }) => {
         }] }
       >
         {
-          options.map(({ value, text }) => {
-            const isSelected: boolean = selectedValue === value;
+          options.map((option) => {
+            const isSelected: boolean = option.value === value;
 
             return (
               <Pressable
                 style={ [s.option, isSelected && s.optionPressed] }
-                key={ value }
-                onPress={ () => handleSelect(value) }
+                key={ option.value }
+                onPress={ () => handleSelect(option.value) }
               >
                 <Text style={ [s.optionText, isSelected && s.optionTextPressed] }>
-                  { text }
+                  { option.text }
                 </Text>
               </Pressable>
             );
