@@ -1,3 +1,4 @@
+import { Count } from '@/app/components';
 import { IMatch } from '@/app/interfaces';
 import { images } from '@/assets/images';
 import React, { useMemo, useRef, useState } from 'react';
@@ -57,9 +58,13 @@ export const Match: React.FC<Props> = ({ match }) => {
         <Team name={ match.awayTeam.name } />
 
         <View style={ s.info }>
-          <Text style={ s.score }>
-            { match.awayScore } : { match.homeScore }
-          </Text>
+          <View style={ s.score }>
+            <Count value={ match.awayScore } style={ s.scoreText } />
+
+            <Text style={ s.scoreText }>:</Text>
+
+            <Count value={ match.homeScore } style={ s.scoreText } />
+          </View>
 
           <Status status={ match.status } />
         </View>

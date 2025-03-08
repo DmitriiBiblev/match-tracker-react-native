@@ -23,6 +23,11 @@ export const styles = (width: number) => StyleSheet.create({
   },
 
   score: {
+    flexDirection: 'row',
+    gap: 4,
+  },
+
+  scoreText: {
     fontSize: width > 600 ? 20 : 14,
     lineHeight: width > 600 ? 24 : 17,
     fontWeight: 600,

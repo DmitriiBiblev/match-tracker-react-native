@@ -1,4 +1,5 @@
 export * from './alert';
+export * from './count';
 export * from './filter';
 export * from './match';
 export * from './match-info';

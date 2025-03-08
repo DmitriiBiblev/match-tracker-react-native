@@ -1,5 +1,6 @@
 import React, { Fragment, useMemo } from 'react';
 import { Text, useWindowDimensions, View } from 'react-native';
+import { Count } from '../count';
 import { styles } from './match-info.styles';
 
 interface Props {
@@ -35,9 +36,7 @@ export const MatchInfo: React.FC<Props> = (props: Props) => {
                 { text }
               </Text>
 
-              <Text style={ s.value }>
-                { props[value] }
-              </Text>
+              <Count value={ props[value] } style={ s.value } />
             </View>
           </Fragment>
         ))

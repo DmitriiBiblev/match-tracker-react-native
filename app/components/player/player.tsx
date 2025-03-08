@@ -1,6 +1,7 @@
 import { images } from '@/assets/images';
 import React, { useMemo } from 'react';
 import { Image, Text, useWindowDimensions, View } from 'react-native';
+import { Count } from '../count';
 import { styles } from './player.styles';
 
 interface Props {
@@ -27,9 +28,7 @@ export const Player: React.FC<Props> = ({ name, totalKills }) => {
           Убийств:
         </Text>
 
-        <Text style={ s.value }>
-          { totalKills }
-        </Text>
+        <Count value={ totalKills } style={ s.value } />
       </View>
     </View>
   );
